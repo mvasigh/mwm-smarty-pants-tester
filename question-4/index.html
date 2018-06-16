@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>MWM Tester Question 4</title>
+
+  <style>
+    .container {
+      width: 100%;
+      padding: 100px 0;
+    }
+
+    .circle {
+      margin: auto;
+      height: 100px;
+      width: 100px;
+      background-color: red;
+      font-family: sans-serif;
+      color: #fff;
+      text-align: center;
+      line-height: 100px;
+      border-radius: 50%;
+      transition: all 0.4s;
+    }
+
+    .rotate-right {
+      transform: rotate(90deg);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="circle" id="cir">Click Me</div>
+  </div>
+
+  <script>
+    document.getElementById('cir').addEventListener('click', function () {
+      this.classList.add('rotate-right');
+    })
+  </script>
+</body>
+
+</html>
