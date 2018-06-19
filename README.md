@@ -21,36 +21,60 @@ $ node test.js
 
 > What are some ways to improve the security of a Unix/Linux system? Include general security guidelines and any specifics related to web servers and db servers.
 
-
-
 ## Question 3
 
 > With the test data below, fill in the “???” in the recursive CTE query so that each item in category table is listed with its parents... [Full question](https://mouthwateringmedia.com/careers/smarty-pants-tester/)
+
+```
+BEGIN;
+CREATE TABLE category (
+  id SERIAL PRIMARY KEY,
+  parent_id INTEGER REFERENCES category(id) DEFERRABLE,
+  name TEXT NOT NULL UNIQUE );
+SET CONSTRAINTS ALL DEFERRED;
+INSERT INTO category VALUES (1, NULL, 'animal');
+INSERT INTO category VALUES (2, NULL, 'mineral');
+INSERT INTO category VALUES (3, NULL, 'vegetable');
+INSERT INTO category VALUES (4, 1, 'dog');
+INSERT INTO category VALUES (5, 1, 'cat');
+INSERT INTO category VALUES (6, 4, 'doberman');
+INSERT INTO category VALUES (7, 4, 'dachshund');
+INSERT INTO category VALUES (8, 3, 'carrot');
+INSERT INTO category VALUES (9, 3, 'lettuce');
+INSERT INTO category VALUES (10, 11, 'paradox1');
+INSERT INTO category VALUES (11, 10, 'paradox2');
+SELECT setval('category_id_seq', (select max(id) from category));
+
+WITH RECURSIVE last_run(parent_id, id_list, name_list) AS (
+  SELECT parent_id, ARRAY[id] AS id_list, ARRAY[name] AS name_list
+  FROM category
+  WHERE parent_id IS NULL
+  UNION ALL
+  SELECT
+  	cat.parent_id,
+  	array_cat(ARRAY[cat.id], lr.id_list),
+  	array_cat(ARRAY[cat.name], lr.name_list)
+  FROM last_run lr
+  JOIN category cat
+  ON cat.parent_id = lr.id_list[1]
+  )
+SELECT id_list, array_to_string(name_list, ', ')
+FROM last_run
+WHERE ORDER BY id_list;
+ROLLBACK;
+```
 
 ## Question 4
 
 > Using HTML5/CSS 3 techniques make a 100 x 100px red square that rotates via an animation 90 degrees when you click on it. You’re allowed to use a small amount of javascript but most of the animation/rotation should be accomplished using HTML5/CSS3. Include a list of which browsers it works on.
 
-Solution can be found in `/question-4/index.html`. You can also [view it on CodePen](https://codepen.io/vasighm/pen/jxXpog). This solution is compatible with IE 10+, Firefox 4+, all versions of Chrome, Edge and Safari, and Opera 11.5+ and incompatible with Opera Mini.   
+Solution can be found in `/question-4/index.html`. You can also [view it on CodePen](https://codepen.io/vasighm/pen/jxXpog). This solution is compatible with IE 10+, Firefox 4+, all versions of Chrome, Edge and Safari, and Opera 11.5+ and incompatible with Opera Mini.
 
-I interpreted the question as meaning that the circle should only rotate 90deg once, when clicked on. For continuous rotation on each click, the degree of rotation can be handled by additional JavaScript (better browser support) or by using a native CSS variable. 
+I interpreted the question as meaning that the circle should only rotate 90deg once, when clicked on. For continuous rotation on each click, the degree of rotation can be handled by additional JavaScript (better browser support) or by using a native CSS variable.
 
 ## Question 5
 
 > In your view, what are the pros and cons of TDD (test driven development). When do you think TDD makes more/less sense (if ever)?
-
-Test driven development is a methodology in which a suite of tests is written for a program before the actual code is written. This allows the programmer to write his or her code to meet the conditions of the tests. Though I don't have experience with TDD in a team, in my opinion TDD seems best suited for projects without a tight deadline for a first iteration and especially with a larger team, but it can be useful anywhere (given the right context).
-
-Pros:
-* Fewer bugs, and easier-to-track bugs. 
-* Helps keep code modular and focused, allows the programmer to write more concise code as he/she knows the exact functionality needed. 
-* Helps to identify design flaws in a program before any program code is written. 
-* The team comes out of it with a full suite of unit tests ready to go. 
-
-Cons:
-* Time consuming in the short-term (though it can save dev time and money in long run), meaning that tight deadlines and/or initial budget constraints may make it difficult or impossible.
-* Tests themselves need to be well-written and also maintained over time.
-* Basically requires a whole-team commitment and understanding.
 
 ## Question 6
 
@@ -58,6 +82,6 @@ Cons:
 
 That's an easy one. Here are two:
 
->"Some people, when confronted with a problem, think ‘I know, I’ll use regular expressions.’ Now they have two problems." - Jamie Zawinski
+> "Some people, when confronted with a problem, think ‘I know, I’ll use regular expressions.’ Now they have two problems." - Jamie Zawinski
 
 [xkcd: Exploits of a Mom](https://xkcd.com/327/)
