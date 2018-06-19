@@ -21,6 +21,8 @@ $ node test.js
 
 > What are some ways to improve the security of a Unix/Linux system? Include general security guidelines and any specifics related to web servers and db servers.
 
+
+
 ## Question 3
 
 > With the test data below, fill in the “???” in the recursive CTE query so that each item in category table is listed with its parents... [Full question](https://mouthwateringmedia.com/careers/smarty-pants-tester/)
@@ -36,6 +38,19 @@ I interpreted the question as meaning that the circle should only rotate 90deg o
 ## Question 5
 
 > In your view, what are the pros and cons of TDD (test driven development). When do you think TDD makes more/less sense (if ever)?
+
+Test driven development is a methodology in which a suite of tests is written for a program before the actual code is written. This allows the programmer to write his or her code to meet the conditions of the tests. Though I don't have experience with TDD in a team, in my opinion TDD seems best suited for projects without a tight deadline for a first iteration and especially with a larger team, but it can be useful anywhere (given the right context).
+
+Pros:
+* Fewer bugs, and easier-to-track bugs. 
+* Helps keep code modular and focused, allows the programmer to write more concise code as he/she knows the exact functionality needed. 
+* Helps to identify design flaws in a program before any program code is written. 
+* The team comes out of it with a full suite of unit tests ready to go. 
+
+Cons:
+* Time consuming in the short-term (though it can save dev time and money in long run), meaning that tight deadlines and/or initial budget constraints may make it difficult or impossible.
+* Tests themselves need to be well-written and also maintained over time.
+* Basically requires a whole-team commitment and understanding.
 
 ## Question 6
 
