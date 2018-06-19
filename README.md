@@ -17,6 +17,8 @@ $ cd question-1/
 $ node test.js
 ```
 
+Alternatively, you can find the [code here on JS Bin](https://jsbin.com/xagivij/edit?js,console).
+
 ## Question 2
 
 > What are some ways to improve the security of a Unix/Linux system? Include general security guidelines and any specifics related to web servers and db servers.
