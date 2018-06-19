@@ -21,6 +21,14 @@ $ node test.js
 
 > What are some ways to improve the security of a Unix/Linux system? Include general security guidelines and any specifics related to web servers and db servers.
 
+Some best practices:
+* Keep system updated with latest security patches
+* Disable root login and add a secondary user for admin tasks, use SSH key pair
+* Use fewer external web services to limit potential vulnerabilities
+* Physically protect the server and disable booting from external devices/media in BIOS, and secure the BIOS
+* Properly partition disk to separate OS files from user files in case of data loss
+* Proper logging of server/user activity and intrusion attempts
+
 ## Question 3
 
 > With the test data below, fill in the “???” in the recursive CTE query so that each item in category table is listed with its parents... [Full question](https://mouthwateringmedia.com/careers/smarty-pants-tester/)
